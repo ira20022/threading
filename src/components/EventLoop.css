@@ -1,0 +1,579 @@
+.event-loop {
+  background: linear-gradient(135deg, #ebf8ff, #bee3f8);
+  border: 2px solid #4299e1;
+  border-radius: 10px;
+  padding: 15px;
+  position: relative;
+}
+
+.event-loop-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-queue {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #90cdf4;
+}
+
+.task-queue h5 {
+  font-size: 0.9rem;
+  color: #2d3748;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.queue-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 40px;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.queue-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  min-width: 60px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.queue-item.async {
+  background: linear-gradient(135deg, #4299e1, #3182ce);
+  color: white;
+  border: 1px solid #2b77c7;
+}
+
+.queue-item.return {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  border: 1px solid #b45309;
+}
+
+.queue-item.next-to-execute {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: 2px solid #047857;
+  animation: nextTaskPulse 1.5s ease-in-out infinite;
+}
+
+.next-indicator {
+  font-size: 0.55rem;
+  background: #fbbf24;
+  color: #92400e;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+@keyframes nextTaskPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  }
+}
+
+.queue-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-id {
+  font-weight: 700;
+}
+
+.task-type {
+  font-size: 0.65rem;
+  opacity: 0.9;
+}
+
+.active-tasks {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #90cdf4;
+}
+
+.active-tasks h5 {
+  font-size: 0.9rem;
+  color: #2d3748;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.active-items, .db-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 60px;
+}
+
+/* DB tasks specific styles */
+.db-tasks {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.db-tasks h5 {
+  font-size: 0.9rem;
+  color: #047857;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.db-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: 1px solid #047857;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.active-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.active-item.async {
+  background: linear-gradient(135deg, #4299e1, #3182ce);
+  color: white;
+  border: 1px solid #2b77c7;
+}
+
+.task-progress {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.task-status-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.task-status {
+  font-size: 0.65rem;
+  opacity: 0.9;
+  font-weight: 500;
+  text-align: center;
+}
+
+.await-indicator {
+  font-size: 0.6rem;
+  background: #fbbf24;
+  color: #92400e;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-weight: 600;
+  animation: awaitPulse 1s ease-in-out infinite;
+}
+
+.loop-indicator {
+  font-size: 0.55rem;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.loop-indicator.in-loop {
+  background: #10b981;
+  color: white;
+}
+
+.loop-indicator.out-loop {
+  background: #f59e0b;
+  color: white;
+}
+
+/* Event loop state styling */
+.active-item.in-event-loop {
+  border-left: 3px solid #10b981;
+}
+
+.active-item.outside-event-loop {
+  border-left: 3px solid #f59e0b;
+  opacity: 0.8;
+  background: linear-gradient(135deg, #4299e1, #f59e0b);
+}
+
+.active-item.outside-event-loop.awaiting-db {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  animation: awaitPulse 2s ease-in-out infinite;
+}
+
+.active-item.outside-event-loop.db-operation {
+  background: linear-gradient(135deg, #10b981, #059669);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.event-loop-info {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #90cdf4;
+}
+
+.info-item {
+  font-size: 0.75rem;
+  color: #2d3748;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-item strong {
+  color: #1a365d;
+}
+
+/* Flow visualization specific to event loop */
+.event-loop .flow-visualization {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.event-loop .flow-lines {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.event-loop .flow-line {
+  position: absolute;
+  height: 1px;
+  width: 30px;
+  animation: eventLoopFlow 3s ease-in-out infinite;
+}
+
+.event-loop .flow-line.async-flow {
+  background: linear-gradient(90deg, transparent, rgba(66, 153, 225, 0.6), transparent);
+}
+
+.event-loop .flow-line.await-flow {
+  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.6), transparent);
+  animation: awaitFlow 4s ease-in-out infinite;
+}
+
+.event-loop .flow-line.db-flow {
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.6), transparent);
+  animation: dbFlow 2s ease-in-out infinite;
+}
+
+/* Interleaving visualization */
+.active-item:nth-child(odd) {
+  animation-delay: 0s;
+}
+
+.active-item:nth-child(even) {
+  animation-delay: 0.5s;
+}
+
+.active-item:nth-child(3n) {
+  animation-delay: 1s;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .event-loop {
+    padding: 12px;
+  }
+  
+  .event-loop-content {
+    gap: 12px;
+  }
+  
+  .queue-items {
+    min-height: 35px;
+  }
+  
+  .queue-item {
+    min-width: 50px;
+    padding: 6px 8px;
+    font-size: 0.7rem;
+  }
+  
+  .active-items {
+    min-height: 50px;
+  }
+  
+  .active-item {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+  
+  .info-item {
+    font-size: 0.7rem;
+  }
+}
+
+/* Animation keyframes */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes eventLoopFlow {
+  0% {
+    transform: translateX(-100%) translateY(0px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.6;
+    transform: translateX(50%) translateY(-10px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateX(100%) translateY(10px);
+  }
+  75% {
+    opacity: 0.6;
+    transform: translateX(150%) translateY(-5px);
+  }
+  100% {
+    transform: translateX(200%) translateY(0px);
+    opacity: 0;
+  }
+}
+
+/* Cooperative multitasking indicator */
+.active-item::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #4299e1, transparent, #4299e1);
+  border-radius: 1px;
+  animation: cooperativeIndicator 1.5s ease-in-out infinite;
+}
+
+@keyframes cooperativeIndicator {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes awaitPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* DB Phase specific styles */
+.active-item.awaiting-db {
+  border-left: 3px solid #fbbf24;
+  background: linear-gradient(135deg, #4299e1, #3182ce, #fbbf24);
+}
+
+.active-item.db-operation {
+  border-left: 3px solid #10b981;
+  background: linear-gradient(135deg, #4299e1, #10b981);
+}
+
+.progress-fill.awaiting-db {
+  background: linear-gradient(90deg, #4299e1, #fbbf24);
+  animation: awaitingProgress 2s ease-in-out infinite;
+}
+
+.progress-fill.db-operation {
+  background: linear-gradient(90deg, #4299e1, #10b981);
+  animation: dbProgress 1.5s ease-in-out infinite;
+}
+
+@keyframes awaitingProgress {
+  0%, 100% {
+    width: 30%;
+    opacity: 0.8;
+  }
+  50% {
+    width: 60%;
+    opacity: 1;
+  }
+}
+
+@keyframes dbProgress {
+  0% {
+    width: 60%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* New flow animations */
+@keyframes awaitFlow {
+  0% {
+    transform: translateX(-100%) translateY(0px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.8;
+    transform: translateX(25%) translateY(-5px);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateX(50%) translateY(5px);
+  }
+  75% {
+    opacity: 0.8;
+    transform: translateX(75%) translateY(-5px);
+  }
+  100% {
+    transform: translateX(100%) translateY(0px);
+    opacity: 0;
+  }
+}
+
+@keyframes dbFlow {
+  0% {
+    transform: translateX(-100%) translateY(0px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+    transform: translateX(20%) translateY(0px);
+  }
+  80% {
+    opacity: 0.8;
+    transform: translateX(80%) translateY(0px);
+  }
+  100% {
+    transform: translateX(100%) translateY(0px);
+    opacity: 0;
+  }
+}
+
+/* Progress bar styles */
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.progress-fill.async-progress {
+  background: linear-gradient(90deg, #4299e1, #3182ce);
+  width: 70%;
+  animation: asyncProgress 2s ease-in-out infinite;
+}
+
+.progress-fill.db-progress {
+  background: linear-gradient(90deg, #10b981, #059669);
+  width: 100%;
+  animation: dbProgress 1.5s ease-in-out infinite;
+}
+
+@keyframes asyncProgress {
+  0%, 100% {
+    width: 30%;
+  }
+  50% {
+    width: 70%;
+  }
+}
+
+/* Enhanced component stats */
+.component-stats {
+  display: flex;
+  gap: 8px;
+  font-size: 0.7rem;
+}
+
+.queue-count {
+  color: #4299e1;
+  font-weight: 600;
+}
+
+.active-count {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.await-count {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.return-count {
+  color: #d97706;
+  font-weight: 600;
+}
+
+.db-count {
+  color: #059669;
+  font-weight: 600;
+}
+
+.total-count {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+/* Empty state styling */
+.empty-state {
+  color: #a0aec0;
+  font-style: italic;
+  font-size: 0.7rem;
+  text-align: center;
+  padding: 10px;
+}

@@ -1,0 +1,460 @@
+.worker-process {
+  background: white;
+  border-radius: 12px;
+  padding: 30px 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.worker-process:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.worker-header {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.worker-header h3 {
+  font-size: 1.3rem;
+  color: #2d3748;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.worker-stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.worker-stats .stat {
+  font-size: 0.8rem;
+  color: #4a5568;
+  background: #f7fafc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.worker-components {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.worker-components .async-sync-container {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  width: 100%;
+}
+
+.worker-components .async-sync-container > * {
+  flex: 1;
+  min-width: 0;
+}
+
+/* DB Operations styling */
+.db-operations {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 15px;
+  border: 1px solid #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  margin-top: 20px;
+}
+
+.db-operations .component-header h4 {
+  color: #047857;
+}
+
+.db-operations .db-count {
+  color: #059669 !important;
+  background: #f0fdf4 !important;
+  border-color: #bbf7d0 !important;
+}
+
+.db-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.db-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 60px;
+}
+
+.db-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: white;
+  border: 1px solid #047857;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.db-item.async-db {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: 1px solid #047857;
+}
+
+.db-item.sync-db {
+  background: linear-gradient(135deg, #ed8936, #dd6b20);
+  border: 1px solid #c05621;
+}
+
+.db-item .task-id {
+  font-weight: 700;
+}
+
+.db-item .task-progress {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.db-item .progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.db-item .progress-fill.db-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  width: 100%;
+  animation: dbProgress 1.5s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+.db-item .progress-fill.sync-db-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #ed8936, #dd6b20);
+  width: 100%;
+  animation: dbProgress 1.5s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+.db-item .task-status-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.db-item .task-status {
+  font-size: 0.65rem;
+  opacity: 0.9;
+  font-weight: 500;
+  text-align: center;
+}
+
+.db-item .loop-indicator {
+  font-size: 0.55rem;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.db-item .task-type-indicator {
+  font-size: 0.55rem;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.db-item .task-type-indicator.async-type {
+  background: #3182ce;
+  color: white;
+}
+
+.db-item .task-type-indicator.sync-type {
+  background: #c05621;
+  color: white;
+}
+
+.db-item .loop-indicator.out-loop {
+  background: #f59e0b;
+  color: white;
+}
+
+.db-item .loop-indicator.blocking-loop {
+  background: #dc2626;
+  color: white;
+}
+
+.db-operations .empty-state {
+  color: #6b7280;
+  font-style: italic;
+  font-size: 0.7rem;
+  text-align: center;
+  padding: 20px;
+  background: #f0fdf4;
+  border: 1px dashed #bbf7d0;
+}
+
+/* Component base styles */
+.component-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.component-header h4 {
+  font-size: 1.1rem;
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.component-stats {
+  display: flex;
+  gap: 10px;
+}
+
+.component-stats span {
+  font-size: 0.75rem;
+  color: #4a5568;
+  background: #f7fafc;
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid #e2e8f0;
+}
+
+.queue-count {
+  color: #805ad5 !important;
+  background: #faf5ff !important;
+  border-color: #d6bcfa !important;
+}
+
+.active-count {
+  color: #3182ce !important;
+  background: #ebf8ff !important;
+  border-color: #90cdf4 !important;
+}
+
+.busy-count {
+  color: #dd6b20 !important;
+  background: #fffaf0 !important;
+  border-color: #fbd38d !important;
+}
+
+.idle-count {
+  color: #718096 !important;
+  background: #f7fafc !important;
+  border-color: #cbd5e0 !important;
+}
+
+.total-count {
+  color: #2d3748 !important;
+  background: #edf2f7 !important;
+  border-color: #cbd5e0 !important;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  color: #a0aec0;
+  font-style: italic;
+  padding: 20px;
+  background: #f7fafc;
+  border-radius: 6px;
+  border: 1px dashed #cbd5e0;
+}
+
+/* Progress bars */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  animation: progress 3s ease-in-out infinite;
+}
+
+.async-progress {
+  background: linear-gradient(90deg, #4299e1, #3182ce);
+}
+
+.sync-progress {
+  background: linear-gradient(90deg, #ed8936, #dd6b20);
+}
+
+/* Flow visualization */
+.flow-visualization {
+  position: relative;
+  margin-top: 10px;
+  height: 30px;
+  overflow: hidden;
+}
+
+.flow-lines {
+  position: relative;
+  height: 100%;
+}
+
+.flow-line {
+  position: absolute;
+  height: 2px;
+  width: 50px;
+  border-radius: 1px;
+  animation: flow 2s ease-in-out infinite;
+}
+
+.async-flow {
+  background: linear-gradient(90deg, transparent, #4299e1, transparent);
+}
+
+.sync-flow {
+  background: linear-gradient(90deg, transparent, #ed8936, transparent);
+}
+
+.offload-arrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.arrow-line {
+  height: 2px;
+  width: 100px;
+  position: relative;
+  border-radius: 1px;
+}
+
+.arrow-line::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: -3px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+.sync-flow.arrow-line {
+  background: #ed8936;
+}
+
+.sync-flow.arrow-line::after {
+  border-left-color: #ed8936;
+}
+
+.arrow-label {
+  font-size: 0.75rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .worker-process {
+    padding: 20px 25px;
+  }
+  
+  .worker-stats {
+    justify-content: center;
+  }
+  
+  .worker-stats .stat {
+    font-size: 0.75rem;
+  }
+  
+  .worker-components {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .component-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .component-stats {
+    align-self: stretch;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .worker-components {
+    gap: 12px;
+  }
+  
+  .worker-components > * {
+    min-width: 150px;
+  }
+}
+
+/* Animation keyframes */
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 70%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes flow {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+}
+
+@keyframes dbProgress {
+  0% {
+    width: 60%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}

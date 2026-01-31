@@ -1,0 +1,151 @@
+.control-panel {
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.control-panel h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #2d3748;
+  text-align: center;
+}
+
+.controls-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-bottom: 25px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.control-group label {
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+.control-input {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #f7fafc;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.control-input button {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 6px;
+  background: #4299e1;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-input button:hover:not(:disabled) {
+  background: #3182ce;
+  transform: translateY(-1px);
+}
+
+.control-input button:disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.control-input .value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2d3748;
+  min-width: 30px;
+  text-align: center;
+}
+
+.info-panel {
+  background: #f0f4f8;
+  border-radius: 8px;
+  padding: 20px;
+  border-left: 4px solid #4299e1;
+}
+
+.info-item {
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #4a5568;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-item strong {
+  color: #2d3748;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .control-panel {
+    padding: 20px;
+  }
+  
+  .controls-grid {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .control-group {
+    min-width: unset;
+  }
+  
+  .control-input {
+    padding: 10px;
+  }
+  
+  .control-input button {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  
+  .control-input .value {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .controls-grid {
+    gap: 20px;
+  }
+  
+  .control-group {
+    min-width: 180px;
+  }
+}
+
+/* Animation for value changes */
+.control-input .value {
+  transition: all 0.2s ease;
+}
+
+.control-input .value:hover {
+  color: #4299e1;
+}
